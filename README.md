@@ -2,7 +2,7 @@
 
 ## Project setup
 
-### Change the front-end directory
+### Change the back-end directory
 ```
 cd backend
 ```
