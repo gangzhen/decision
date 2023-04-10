@@ -1,12 +1,23 @@
 # backend
 
+## Project setup
 
+### Change the front-end directory
+```
+cd backend
+```
 
 # frontend
 
 ## Project setup
+
+### Change the front-end directory
 ```
 cd frontend
+```
+
+### Install related dependencies
+```
 npm install
 ```
 
