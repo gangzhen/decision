@@ -1,0 +1,75 @@
+h1 {
+    font-size: 2em; /* 对应宋体小二号字体大小 */
+    font-family: SimHei, Arial, sans-serif; /* 指定宋体字体 */
+    font-weight: bolder;
+    line-height: 1.5; /* 行高为字体大小的1.5倍 */
+}
+
+h2 {
+    font-family: SimSun, Arial, serif;
+    font-weight: bolder;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+h3 {
+    font-family: SimSun, Arial, serif;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.questionnaire {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.el-header {
+    padding: 0;
+    text-align: center;
+    display: flex; /* 使用flex布局 */
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+
+.el-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.el-radio-group {
+    display: flex; /* 将选项容器设置为 flex 布局 */
+    flex-direction: column; /* 将选项容器设置为纵向排列 */
+    margin-bottom: 40px;
+}
+
+.el-radio__label {
+    font-family: SimSun, Arial, serif; /* 将字体设置为宋体 */
+    font-size: 14px; /* 将字体大小设置为 14px */
+    line-height: 1.5;
+}
+
+.el-button {
+    margin-top: 40px;
+}
+
+.submit_button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    margin-bottom: 50px;
+}
