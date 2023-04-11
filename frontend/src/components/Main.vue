@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-for="topic in $topics">
-            <Topics v-bind:topic="topic"></Topics>
-            <Selections v-bind:index="topic.index" v-bind:code="topic.code" v-bind:selections="$selections"
+        <div v-for="risk in $risks">
+            <Risks v-bind:risk="risk"></Risks>
+            <Selections v-bind:index="risk.index" v-bind:code="risk.code"
                      v-on:send-selection="receiveSelection"></Selections>
         </div>
         <Analysis v-bind:answers="answers"></Analysis>
@@ -12,14 +12,14 @@
 
 <script>
 // @ is an alias to /src
-import Topics from '@/components/Topics.vue'
+import Risks from '@/components/Risks.vue'
 import Selections from '@/components/Selections.vue'
 import Analysis from '@/components/Analysis.vue'
 
 export default {
     name: "Main",
     components: {
-        Topics, Selections, Analysis
+        Risks, Selections, Analysis
     },
     data() {
         return {
@@ -32,7 +32,7 @@ export default {
     methods: {
         // 初始化回答的答案数组
         initArray() {
-            let length = this.$topics.length;
+            let length = this.$risks.length;
             this.answers = Array.from({length: length}, () => ({
                 index: 0,
                 code: '',
@@ -50,13 +50,13 @@ export default {
 
             switch (answer.type) {
                 case 'possibility':
-                    this.answers[number].possibility = answer.label;
+                    this.answers[number].possibility = answer.score;
                     break;
                 case 'severity':
-                    this.answers[number].severity = answer.label;
+                    this.answers[number].severity = answer.score;
                     break;
                 case 'controllability':
-                    this.answers[number].controllability = answer.label;
+                    this.answers[number].controllability = answer.score;
                     break;
                 default:
                     break;

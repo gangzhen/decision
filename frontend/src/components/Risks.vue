@@ -1,15 +1,15 @@
 <template>
     <div>
-        <h2>{{ topic.index }}. {{ topic.detail }}</h2>
+        <h2>{{ risk.index }}. {{ risk.detail }}</h2>
     </div>
 </template>
 
 <script>
 
 export default {
-    name: "Topics",
+    name: "Risks",
     props: {
-        topic: {
+        risk: {
             type: Object,
             default: () => ({})
         }

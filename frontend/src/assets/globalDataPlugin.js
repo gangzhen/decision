@@ -1,6 +1,6 @@
 export default {
     install(Vue) {
-        Vue.prototype.$topics = [
+        Vue.prototype.$risks = [
             {index: 1, code: 'OR111', detail: '运动员的身高不占优势'},
             {index: 2, code: 'OR112', detail: '运动员的身高、体重比例不占优势'},
             // {index: 3, code: 'OR121', detail: '运动员的先天肢体协调性较差'},
@@ -62,40 +62,40 @@ export default {
             // {index: 59, code: 'SR432', detail: '运动员与资助方关系处理不当'}
         ];
 
-        Vue.prototype.$selections = [
+        Vue.prototype.$selectItems = [
             {
                 type: "possibility",
-                option: [
-                    {label: 1, value: '根本不可能'},
-                    {label: 2, value: '很少有可能'},
-                    {label: 3, value: '不太有可能'},
-                    {label: 4, value: '比较有可能'},
-                    {label: 5, value: '非常有可能'}
+                selections: [
+                    {score: 1, detail: '根本不可能'},
+                    {score: 2, detail: '很少有可能'},
+                    {score: 3, detail: '不太有可能'},
+                    {score: 4, detail: '比较有可能'},
+                    {score: 5, detail: '非常有可能'}
                 ]
             },
             {
                 type: "severity",
-                option: [
-                    {label: 1, value: '没有影响'},
-                    {label: 2, value: '不严重'},
-                    {label: 3, value: '不太严重'},
-                    {label: 4, value: '比较严重'},
-                    {label: 5, value: '非常严重'},
+                selections: [
+                    {score: 1, detail: '没有影响'},
+                    {score: 2, detail: '不严重'},
+                    {score: 3, detail: '不太严重'},
+                    {score: 4, detail: '比较严重'},
+                    {score: 5, detail: '非常严重'},
                 ]
             },
             {
                 type: "controllability",
-                option: [
-                    {label: 1, value: '很容易控制'},
-                    {label: 2, value: '较易控制'},
-                    {label: 3, value: '控制有难度'},
-                    {label: 4, value: '控制难度很大'},
-                    {label: 5, value: '不能控制'},
+                selections: [
+                    {score: 1, detail: '很容易控制'},
+                    {score: 2, detail: '较易控制'},
+                    {score: 3, detail: '控制有难度'},
+                    {score: 4, detail: '控制难度很大'},
+                    {score: 5, detail: '不能控制'},
                 ]
             }
         ];
 
-        Vue.prototype.$codeArr = [
+        Vue.prototype.$riskCodes = [
             'OR111',
             'OR112',
             'OR121',

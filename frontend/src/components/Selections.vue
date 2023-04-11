@@ -1,14 +1,14 @@
 <template>
     <div>
-        <div v-for="item in selections">
+        <div v-for="item in $selectItems">
             <!-- 可能性 -->
             <div v-if="item.type === 'possibility'">
                 <h3>- 可能性</h3>
                 <el-radio-group v-model="possibility">
                     <table>
-                        <tr v-for="option in item.option">
+                        <tr v-for="selection in item.selections">
                             <td>
-                                <el-radio :label="option.label" @click.native="handlePossibilityClick(option, $event)"> {{ option.value }}</el-radio>
+                                <el-radio :label="selection.score" @click.native="handlePossibilityClick(selection, $event)"> {{ selection.detail }}</el-radio>
                             </td>
                         </tr>
                     </table>
@@ -20,9 +20,9 @@
                 <h3>- 严重性</h3>
                 <el-radio-group v-model="severity">
                     <table>
-                        <tr v-for="option in item.option">
+                        <tr v-for="selection in item.selections">
                             <td>
-                                <el-radio :label="option.label" @click.native="handleSeverityClick(option, $event)"> {{ option.value }}</el-radio>
+                                <el-radio :label="selection.score" @click.native="handleSeverityClick(selection, $event)"> {{ selection.detail }}</el-radio>
                             </td>
                         </tr>
                     </table>
@@ -34,9 +34,9 @@
                 <h3>- 可控性</h3>
                 <el-radio-group v-model="controllability">
                     <table>
-                        <tr v-for="option in item.option">
+                        <tr v-for="selection in item.selections">
                             <td>
-                                <el-radio :label="option.label" @click.native="handleControllabilityClick(option, $event)"> {{ option.value }}</el-radio>
+                                <el-radio :label="selection.score" @click.native="handleControllabilityClick(selection, $event)"> {{ selection.detail }}</el-radio>
                             </td>
                         </tr>
                     </table>
@@ -57,10 +57,6 @@ export default {
         code: {
             type: String,
             default: ''
-        },
-        selections: {
-            type: Array,
-            default: () => []
         }
     },
     data() {
@@ -80,7 +76,7 @@ export default {
                 index: this.index,
                 code: this.code,
                 type: 'possibility',
-                label: option.label
+                score: option.score
             };
             this.sendSelection(answer);
         },
@@ -93,7 +89,7 @@ export default {
                 index: this.index,
                 code: this.code,
                 type: 'severity',
-                label: option.label
+                score: option.score
             };
             this.sendSelection(answer);
         },
@@ -106,7 +102,7 @@ export default {
                 index: this.index,
                 code: this.code,
                 type: 'controllability',
-                label: option.label
+                score: option.score
             };
             this.sendSelection(answer);
         },
