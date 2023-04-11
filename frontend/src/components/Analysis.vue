@@ -1,6 +1,6 @@
 <template>
     <div class="submit_button">
-        <el-button type="primary" @click="submitAnswers()">提交</el-button>
+        <el-button type="primary" @click="submitAnswers">提交</el-button>
     </div>
 </template>
 
@@ -51,8 +51,13 @@ export default {
         submitAnswers() {
             this.isAllTopicsSelected();
             if (this.isFinished) {
-                //TODO 调用后端接口
-                console.log('填完成')
+                // 调用后端接口查询
+                this.$http.post("/analysis/decision", this.answers).then(res => {
+                    console.log(res)
+                    console.log('响应成功')
+                    // this.resultData = res.records
+                    //TODO 调用后端接口成功后弹窗提示成绩，并关闭窗口是清空选择项
+                })
             } else {
                 //TODO 弹窗提示未填写完毕
                 console.log('没填完成')
