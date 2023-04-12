@@ -32,21 +32,21 @@ export default {
     methods: {
         // 初始化回答的答案数组
         initArray() {
-            let length = this.$risks.length;
-            this.answers = Array.from({length: length}, () => ({
-                index: 0,
-                code: '',
-                possibility: 0,
-                severity: 0,
-                controllability: 0
-            }));
+            this.answers = [];
+            this.$risks.forEach(risk => {
+                let item = {
+                    index: risk.index,
+                    code: risk.code,
+                    possibility: 0,
+                    severity: 0,
+                    controllability: 0
+                };
+                this.answers.push(item);
+            })
         },
         // 父子组件回调函数，接收子组件选择的选项值及题目信息
         receiveSelection(answer) {
-            let number = answer.index - 1;
-
-            this.answers[number].index = answer.index;
-            this.answers[number].code = answer.code;
+            let number = this.answers.findIndex(item => item.code === answer.code);
 
             switch (answer.type) {
                 case 'possibility':

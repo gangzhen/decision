@@ -24,7 +24,7 @@ public enum PersonalRiskDecision {
     ;
 
     public static final String CODE = "SR4";
-    public static final String[] SR4 = {Risks.SR411.getCode(), Risks.SR413.getCode(), Risks.SR414.getCode(), Risks.SR415.getCode(), Risks.SR416.getCode(), Risks.SR417.getCode(), Risks.SR418.getCode(), Risks.SR421.getCode(), Risks.SR422.getCode(), Risks.SR231.getCode(), Risks.SR432.getCode()};
+    public static final String[] SR4 = {Risks.SR411.getCode(), Risks.SR413.getCode(), Risks.SR414.getCode(), Risks.SR415.getCode(), Risks.SR416.getCode(), Risks.SR417.getCode(), Risks.SR418.getCode(), Risks.SR421.getCode(), Risks.SR422.getCode(), Risks.SR431.getCode(), Risks.SR432.getCode()};
 
     private final RiskScores[] scoreArr;
     private final int factor;
