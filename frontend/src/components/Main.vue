@@ -5,7 +5,7 @@
             <Selections v-bind:index="risk.index" v-bind:code="risk.code"
                      v-on:send-selection="receiveSelection"></Selections>
         </div>
-        <Analysis v-bind:answers="answers"></Analysis>
+        <Analysis v-bind:answers="answers" v-on:clear-selection="clearSelection"></Analysis>
     </div>
 
 </template>
@@ -60,6 +60,14 @@ export default {
                     break;
                 default:
                     break;
+            }
+        },
+        // 清空选择项
+        clearSelection(flag) {
+            if (flag) {
+                this.answers = [];
+                //重新加载页面
+                location.reload();
             }
         }
     }

@@ -1,6 +1,13 @@
 <template>
     <div class="submit_button">
         <el-button type="primary" @click="submitAnswers">提交</el-button>
+
+        <el-dialog title="提示" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
+            <span>恭喜你，合格了！</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="closeDialog">关 闭</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 
@@ -15,7 +22,8 @@ export default {
     },
     data() {
         return {
-            isFinished: true
+            isFinished: true,
+            dialogVisible: false
         }
     },
     methods: {
@@ -55,12 +63,21 @@ export default {
                     console.log(res)
                     console.log('响应成功')
                     // this.resultData = res.records
+                    this.dialogVisible = true;
                     //TODO 调用后端接口成功后弹窗提示成绩，并关闭窗口是清空选择项
                 })
             } else {
-                //TODO 弹窗提示未填写完毕
-                console.log('没填完成')
+                // 弹窗提示未填写完毕
+                this.$message({
+                    message: '警告，题目未全部选择，请确认',
+                    type: 'warning'
+                });
             }
+        },
+        // 关闭弹窗
+        closeDialog() {
+            this.dialogVisible = false;
+            this.$emit('clear-selection', true);
         }
     }
 }
