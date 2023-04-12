@@ -7,6 +7,16 @@
 cd backend
 ```
 
+### Maven package
+```
+mvn clean package -DskipTests
+```
+
+### Path to the jar package
+```
+.\decision\backend\target\backend-0.0.1-SNAPSHOT.jar
+```
+
 # frontend
 
 ## Project setup
