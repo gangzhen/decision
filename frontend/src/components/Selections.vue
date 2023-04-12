@@ -8,7 +8,10 @@
                     <table>
                         <tr v-for="selection in item.selections">
                             <td>
-                                <el-radio :label="selection.score" @click.native="handlePossibilityClick(selection, $event)"> {{ selection.detail }}</el-radio>
+                                <el-radio :label="selection.score"
+                                          @click.native="handlePossibilityClick(selection, $event)">
+                                    {{ selection.detail }}
+                                </el-radio>
                             </td>
                         </tr>
                     </table>
@@ -22,7 +25,10 @@
                     <table>
                         <tr v-for="selection in item.selections">
                             <td>
-                                <el-radio :label="selection.score" @click.native="handleSeverityClick(selection, $event)"> {{ selection.detail }}</el-radio>
+                                <el-radio :label="selection.score"
+                                          @click.native="handleSeverityClick(selection, $event)">
+                                    {{ selection.detail }}
+                                </el-radio>
                             </td>
                         </tr>
                     </table>
@@ -36,7 +42,10 @@
                     <table>
                         <tr v-for="selection in item.selections">
                             <td>
-                                <el-radio :label="selection.score" @click.native="handleControllabilityClick(selection, $event)"> {{ selection.detail }}</el-radio>
+                                <el-radio :label="selection.score"
+                                          @click.native="handleControllabilityClick(selection, $event)">
+                                    {{ selection.detail }}
+                                </el-radio>
                             </td>
                         </tr>
                     </table>

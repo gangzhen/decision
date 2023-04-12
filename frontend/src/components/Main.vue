@@ -3,7 +3,7 @@
         <div v-for="risk in $risks">
             <Risks v-bind:risk="risk"></Risks>
             <Selections v-bind:index="risk.index" v-bind:code="risk.code"
-                     v-on:send-selection="receiveSelection"></Selections>
+                        v-on:send-selection="receiveSelection"></Selections>
         </div>
         <Analysis v-bind:answers="answers" v-on:clear-selection="clearSelection"></Analysis>
     </div>
