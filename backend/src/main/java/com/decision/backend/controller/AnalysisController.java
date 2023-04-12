@@ -22,7 +22,6 @@ public class AnalysisController {
 
     @PostMapping("/decision")
     public ResultResponse analysisDecisionResult(@RequestBody List<AnswerRequest> answerList) {
-        analysisService.analysisDecision(answerList);
-        return ResultResponse.testInstance();
+        return analysisService.analysisDecision(answerList);
     }
 }
