@@ -17,6 +17,10 @@ public enum DecisionRuleDecision {
 
     ;
 
+    // TODO 计算方法未知
+    public static final String CODE = "DR";
+    public static final String[] DR = {};
+
     private final LevelScores[] scoreArr;
     private final int factor;
 }

@@ -1,9 +1,14 @@
 package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RiskScores;
+import com.decision.backend.model.Risks;
+import com.decision.backend.service.RiskAttrDTO;
+import com.decision.backend.utils.CompareUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -18,6 +23,17 @@ public enum PersonalRiskDecision {
 
     ;
 
+    public static final String CODE = "SR4";
+    public static final String[] SR4 = {Risks.SR411.getCode(), Risks.SR413.getCode(), Risks.SR414.getCode(), Risks.SR415.getCode(), Risks.SR416.getCode(), Risks.SR417.getCode(), Risks.SR418.getCode(), Risks.SR421.getCode(), Risks.SR422.getCode(), Risks.SR231.getCode(), Risks.SR432.getCode()};
+
     private final RiskScores[] scoreArr;
     private final int factor;
+
+    public static int determinateFactor(List<RiskAttrDTO> riskAttrs) {
+        int factor = 0;
+        for (PersonalRiskDecision decision : PersonalRiskDecision.values()) {
+            factor = CompareUtils.CompareAttrValue(riskAttrs, factor, decision.getScoreArr(), decision.getFactor());
+        }
+        return factor;
+    }
 }

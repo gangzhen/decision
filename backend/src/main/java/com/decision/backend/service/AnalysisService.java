@@ -2,12 +2,13 @@ package com.decision.backend.service;
 
 import com.decision.backend.controller.request.AnswerRequest;
 import com.decision.backend.controller.response.ResultResponse;
-import com.decision.backend.model.decision.DecisionRuleDecision;
+import com.decision.backend.model.decision.*;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AnalysisService {
@@ -69,7 +70,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisGROR1Factor(List<RiskAttrDTO> riskAttrs) {
-        return null;
+        List<String> OR1 = Arrays.asList(GeneticRiskDecision.OR1);
+        List<RiskAttrDTO> geneticRiskAttrs = riskAttrs.stream().filter(attr -> OR1.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = GeneticRiskDecision.determinateFactor(geneticRiskAttrs);
+        return RiskFactorDTO.newInstance(GeneticRiskDecision.CODE, factor);
     }
 
     /**
@@ -79,7 +83,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisNGROR2Factor(List<RiskAttrDTO> riskAttrs) {
-        return null;
+        List<String> OR2 = Arrays.asList(NonGeneticRiskDecision.OR2);
+        List<RiskAttrDTO> nonGeneticRiskAttrs = riskAttrs.stream().filter(attr -> OR2.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = NonGeneticRiskDecision.determinateFactor(nonGeneticRiskAttrs);
+        return RiskFactorDTO.newInstance(NonGeneticRiskDecision.CODE, factor);
     }
 
     /**
@@ -89,7 +96,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisCRSR1Factor(List<RiskAttrDTO> riskAttrs) {
-        return null;
+        List<String> SR1 = Arrays.asList(CultureRiskDecision.SR1);
+        List<RiskAttrDTO> cultureRiskAttrs = riskAttrs.stream().filter(attr -> SR1.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = CultureRiskDecision.determinateFactor(cultureRiskAttrs);
+        return RiskFactorDTO.newInstance(CultureRiskDecision.CODE, factor);
     }
 
     /**
@@ -99,7 +109,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisSRSR2Factor(List<RiskAttrDTO> riskAttrs) {
-        return null;
+        List<String> SR2 = Arrays.asList(SystemRiskDecision.SR2);
+        List<RiskAttrDTO> systemRiskAttrs = riskAttrs.stream().filter(attr -> SR2.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = SystemRiskDecision.determinateFactor(systemRiskAttrs);
+        return RiskFactorDTO.newInstance(SystemRiskDecision.CODE, factor);
     }
 
     /**
@@ -109,7 +122,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisSERSR3Factor(List<RiskAttrDTO> riskAttrs) {
-        return null;
+        List<String> SR3 = Arrays.asList(SecurityRiskDecision.SR3);
+        List<RiskAttrDTO> systemRiskAttrs = riskAttrs.stream().filter(attr -> SR3.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = SecurityRiskDecision.determinateFactor(systemRiskAttrs);
+        return RiskFactorDTO.newInstance(SecurityRiskDecision.CODE, factor);
     }
 
     /**
@@ -119,7 +135,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisPRSR4Factor(List<RiskAttrDTO> riskAttrs) {
-        return null;
+        List<String> SR4 = Arrays.asList(PersonalRiskDecision.SR4);
+        List<RiskAttrDTO> personalRiskAttrs = riskAttrs.stream().filter(attr -> SR4.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = PersonalRiskDecision.determinateFactor(personalRiskAttrs);
+        return RiskFactorDTO.newInstance(PersonalRiskDecision.CODE, factor);
     }
 
     /**
@@ -129,7 +148,10 @@ public class AnalysisService {
      * @date 2023/4/12 10:33
      */
     private RiskFactorDTO analysisSuccessRiskFactor(List<RiskFactorDTO> factorList) {
-        return null;
+        List<String> SR = Arrays.asList(SuccessRiskDecision.SR);
+        List<RiskFactorDTO> successRiskFactors = factorList.stream().filter(attr -> SR.contains(attr.getCode())).collect(Collectors.toList());
+        int factor = SuccessRiskDecision.determinateFactor(successRiskFactors);
+        return RiskFactorDTO.newInstance(SuccessRiskDecision.CODE, factor);
     }
 
     /**
@@ -143,7 +165,7 @@ public class AnalysisService {
     }
 
     public int determinateAttr(int score) {
-        int attribute = 0;
+        int attribute;
         if (score < 40) {
             attribute = 1;
         } else if (score < 90) {

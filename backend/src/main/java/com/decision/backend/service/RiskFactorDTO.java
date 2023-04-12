@@ -15,4 +15,8 @@ public class RiskFactorDTO {
     public static RiskFactorDTO newInstance() {
         return new RiskFactorDTO("", 0);
     }
+
+    public static RiskFactorDTO newInstance(String code, int factor) {
+        return new RiskFactorDTO(code, factor);
+    }
 }

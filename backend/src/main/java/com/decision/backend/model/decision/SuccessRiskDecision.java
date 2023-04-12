@@ -1,9 +1,14 @@
 package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RuleScores;
+import com.decision.backend.service.RiskFactorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
+
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Getter
 @AllArgsConstructor
@@ -20,6 +25,31 @@ public enum SuccessRiskDecision {
 
     ;
 
+    // 此SR为SuccessRisk 非SR1、SR2、SR3、SR4的和
+    public static final String CODE = "SR";
+    public static final String[] SR = {"OR2", "SR1", "SR3", "SR4"};
+
+
     private final RuleScores[] scoreArr;
     private final int factor;
+
+    public static int determinateFactor(List<RiskFactorDTO> riskFactors) {
+        int factor = 0;
+        for (SuccessRiskDecision decision : SuccessRiskDecision.values()) {
+            boolean flag = true;
+            for (RuleScores score : decision.getScoreArr()) {
+                List<RiskFactorDTO> riskAttr = riskFactors.stream().filter(attr -> Objects.equals(score.getRuleItem().getCode(), attr.getCode())).collect(Collectors.toList());
+                if (riskAttr.size() > 0) {
+                    flag = score.getRiskAttr() == riskAttr.get(0).getFactor();
+                } else {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag) {
+                factor = decision.getFactor();
+            }
+        }
+        return factor;
+    }
 }
