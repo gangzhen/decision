@@ -2,7 +2,12 @@
     <div class="submit_button">
         <el-button type="primary" @click="submitAnswers">提交</el-button>
 
-        <el-dialog title="结果展示" :visible.sync="dialogVisible" width="30%" :before-close="closeDialog" :center="true">
+        <el-dialog title="结果展示"
+                   :visible.sync="dialogVisible"
+                   width="30%"
+                   :before-close="closeDialog"
+                   :center="true"
+                   :close-on-click-modal="false">
 
             <table>
                 <thead>
