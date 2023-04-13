@@ -1,4 +1,4 @@
-package com.decision.backend.service;
+package com.decision.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

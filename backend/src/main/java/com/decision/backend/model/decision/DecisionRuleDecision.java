@@ -19,6 +19,7 @@ public enum DecisionRuleDecision {
 
     // TODO 计算方法未知
     public static final String CODE = "DR";
+    public static final String NAME = "我国网球运动员成才风险发生的可能性、严重性、可控性决策规则";
     public static final String[] DR = {};
 
     private final LevelScores[] scoreArr;

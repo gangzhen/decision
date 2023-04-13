@@ -2,11 +2,27 @@
     <div class="submit_button">
         <el-button type="primary" @click="submitAnswers">提交</el-button>
 
-        <el-dialog title="提示" :visible.sync="dialogVisible" width="30%">
-            <span>恭喜你，合格了！</span>
-            <span slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="closeDialog">关 闭</el-button>
-            </span>
+        <el-dialog title="结果展示" :visible.sync="dialogVisible" width="30%" :before-close="closeDialog" :center="true">
+
+            <table>
+                <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>风险规则</th>
+                    <th>得分</th>
+                    <th>详情</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in resultTable">
+                    <td>{{ item.index }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.score }}</td>
+                    <td>{{ item.detail }}</td>
+                </tr>
+                </tbody>
+            </table>
+
         </el-dialog>
     </div>
 </template>
@@ -23,7 +39,8 @@ export default {
     data() {
         return {
             isFinished: true,
-            dialogVisible: false
+            dialogVisible: false,
+            resultTable: []
         }
     },
     methods: {
@@ -60,11 +77,11 @@ export default {
             if (this.isFinished) {
                 // 调用后端接口查询
                 this.$http.post("/analysis/decision", this.answers).then(res => {
-                    console.log(res)
-                    console.log('响应成功')
-                    // this.resultData = res.records
-                    this.dialogVisible = true;
-                    //TODO 调用后端接口成功后弹窗提示成绩，并关闭窗口是清空选择项
+                    if (res.status === 200) {
+                        //调用后端接口成功后弹窗提示成绩，并关闭窗口是清空选择项
+                        this.resultTable = res.resultList;
+                        this.dialogVisible = true;
+                    }
                 })
             } else {
                 // 弹窗提示未填写完毕
@@ -84,5 +101,16 @@ export default {
 </script>
 
 <style scoped>
+table {
+    width: 95%; /* 宽度100% */
+    table-layout: auto; /* 固定列宽 */
+    border-collapse: collapse; /* 合并边框 */
+    margin: auto; /* 居中 */
+}
+
+th, td {
+    border: 1px solid black; /* 添加边框 */
+    text-align: center; /* 文本居中 */
+}
 
 </style>

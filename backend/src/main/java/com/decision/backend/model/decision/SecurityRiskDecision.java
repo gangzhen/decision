@@ -2,7 +2,7 @@ package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RiskScores;
 import com.decision.backend.model.Risks;
-import com.decision.backend.service.RiskAttrDTO;
+import com.decision.backend.dto.RiskAttrDTO;
 import com.decision.backend.utils.CompareUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,7 @@ public enum SecurityRiskDecision {
     ;
 
     public static final String CODE = "SR3";
+    public static final String NAME = "来源于社会环境的物质保障风险（SR3）决策规则";
     public static final String[] SR3 = {Risks.SR311.getCode(), Risks.SR312.getCode(), Risks.SR321.getCode(), Risks.SR322.getCode(), Risks.SR331.getCode(), Risks.SR341.getCode()};
 
     private final RiskScores[] scoreArr;

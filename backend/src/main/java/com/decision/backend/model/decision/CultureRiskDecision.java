@@ -2,7 +2,7 @@ package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RiskScores;
 import com.decision.backend.model.Risks;
-import com.decision.backend.service.RiskAttrDTO;
+import com.decision.backend.dto.RiskAttrDTO;
 import com.decision.backend.utils.CompareUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +22,7 @@ public enum CultureRiskDecision {
     ;
 
     public static final String CODE = "SR1";
+    public static final String NAME = "来源于社会环境的项目文化风险（SR1）决策规则";
     public static final String[] SR1 = {Risks.SR111.getCode(), Risks.SR121.getCode()};
 
 

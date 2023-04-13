@@ -2,12 +2,17 @@ package com.decision.backend.service;
 
 import com.decision.backend.controller.request.AnswerRequest;
 import com.decision.backend.controller.response.ResultResponse;
+import com.decision.backend.controller.response.RiskResultResponse;
+import com.decision.backend.dto.RiskAttrDTO;
+import com.decision.backend.dto.RiskFactorDTO;
 import com.decision.backend.model.decision.*;
+import com.decision.backend.utils.CompareUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,7 +42,7 @@ public class AnalysisService {
     /**
      * @param answerList 问题选择项集合
      * @description 计算网球运动员成才风险发生的可能性、严重性、可控性决策规则风险系数 （p、s、c）
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:17
      */
     public RiskFactorDTO analysisDecisionRuleFactor(List<AnswerRequest> answerList) {
@@ -47,7 +52,7 @@ public class AnalysisService {
     /**
      * @param answerList 问题选择项集合
      * @description 计算每项风险的风险属性值 (p * s * c)
-     * @return: java.util.List<com.decision.backend.service.RiskAttrDTO>
+     * @return: java.util.List<com.decision.backend.dto.RiskAttrDTO>
      * @date 2023/4/12 10:10
      */
     private List<RiskAttrDTO> analysisRiskAttr(List<AnswerRequest> answerList) {
@@ -66,92 +71,92 @@ public class AnalysisService {
     /**
      * @param riskAttrs 每项风险的风险属性值
      * @description 根据是否匹配风险得分模板确定规则风险系数 (OR1)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisGROR1Factor(List<RiskAttrDTO> riskAttrs) {
         List<String> OR1 = Arrays.asList(GeneticRiskDecision.OR1);
-        List<RiskAttrDTO> geneticRiskAttrs = riskAttrs.stream().filter(attr -> OR1.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskAttrDTO> geneticRiskAttrs = riskAttrs.stream().filter(item -> OR1.contains(item.getCode())).collect(Collectors.toList());
         int factor = GeneticRiskDecision.determinateFactor(geneticRiskAttrs);
-        return RiskFactorDTO.newInstance(GeneticRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(GeneticRiskDecision.CODE, GeneticRiskDecision.NAME, factor);
     }
 
     /**
      * @param riskAttrs 每项风险的风险属性值
      * @description 根据是否匹配风险得分模板确定规则风险系数 (OR2)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisNGROR2Factor(List<RiskAttrDTO> riskAttrs) {
         List<String> OR2 = Arrays.asList(NonGeneticRiskDecision.OR2);
-        List<RiskAttrDTO> nonGeneticRiskAttrs = riskAttrs.stream().filter(attr -> OR2.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskAttrDTO> nonGeneticRiskAttrs = riskAttrs.stream().filter(item -> OR2.contains(item.getCode())).collect(Collectors.toList());
         int factor = NonGeneticRiskDecision.determinateFactor(nonGeneticRiskAttrs);
-        return RiskFactorDTO.newInstance(NonGeneticRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(NonGeneticRiskDecision.CODE, NonGeneticRiskDecision.NAME, factor);
     }
 
     /**
      * @param riskAttrs 每项风险的风险属性值
      * @description 根据是否匹配风险得分模板确定规则风险系数 (SR1)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisCRSR1Factor(List<RiskAttrDTO> riskAttrs) {
         List<String> SR1 = Arrays.asList(CultureRiskDecision.SR1);
-        List<RiskAttrDTO> cultureRiskAttrs = riskAttrs.stream().filter(attr -> SR1.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskAttrDTO> cultureRiskAttrs = riskAttrs.stream().filter(item -> SR1.contains(item.getCode())).collect(Collectors.toList());
         int factor = CultureRiskDecision.determinateFactor(cultureRiskAttrs);
-        return RiskFactorDTO.newInstance(CultureRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(CultureRiskDecision.CODE, CultureRiskDecision.NAME, factor);
     }
 
     /**
      * @param riskAttrs 每项风险的风险属性值
      * @description 根据是否匹配风险得分模板确定规则风险系数 (SR2)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisSRSR2Factor(List<RiskAttrDTO> riskAttrs) {
         List<String> SR2 = Arrays.asList(SystemRiskDecision.SR2);
-        List<RiskAttrDTO> systemRiskAttrs = riskAttrs.stream().filter(attr -> SR2.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskAttrDTO> systemRiskAttrs = riskAttrs.stream().filter(item -> SR2.contains(item.getCode())).collect(Collectors.toList());
         int factor = SystemRiskDecision.determinateFactor(systemRiskAttrs);
-        return RiskFactorDTO.newInstance(SystemRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(SystemRiskDecision.CODE, SystemRiskDecision.NAME, factor);
     }
 
     /**
      * @param riskAttrs 每项风险的风险属性值
      * @description 根据是否匹配风险得分模板确定规则风险系数 (SR3)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisSERSR3Factor(List<RiskAttrDTO> riskAttrs) {
         List<String> SR3 = Arrays.asList(SecurityRiskDecision.SR3);
-        List<RiskAttrDTO> systemRiskAttrs = riskAttrs.stream().filter(attr -> SR3.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskAttrDTO> systemRiskAttrs = riskAttrs.stream().filter(item -> SR3.contains(item.getCode())).collect(Collectors.toList());
         int factor = SecurityRiskDecision.determinateFactor(systemRiskAttrs);
-        return RiskFactorDTO.newInstance(SecurityRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(SecurityRiskDecision.CODE, SecurityRiskDecision.NAME, factor);
     }
 
     /**
      * @param riskAttrs 每项风险的风险属性值
      * @description 根据是否匹配风险得分模板确定规则风险系数 (SR4)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:27
      */
     private RiskFactorDTO analysisPRSR4Factor(List<RiskAttrDTO> riskAttrs) {
         List<String> SR4 = Arrays.asList(PersonalRiskDecision.SR4);
-        List<RiskAttrDTO> personalRiskAttrs = riskAttrs.stream().filter(attr -> SR4.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskAttrDTO> personalRiskAttrs = riskAttrs.stream().filter(item -> SR4.contains(item.getCode())).collect(Collectors.toList());
         int factor = PersonalRiskDecision.determinateFactor(personalRiskAttrs);
-        return RiskFactorDTO.newInstance(PersonalRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(PersonalRiskDecision.CODE, PersonalRiskDecision.NAME, factor);
     }
 
     /**
      * @param factorList 风险项系数集合
      * @description 根据是否匹配风险得分模板确定规则风险系数 (成才风险)
-     * @return: com.decision.backend.service.RiskFactorDTO
+     * @return: com.decision.backend.dto.RiskFactorDTO
      * @date 2023/4/12 10:33
      */
     private RiskFactorDTO analysisSuccessRiskFactor(List<RiskFactorDTO> factorList) {
         List<String> SR = Arrays.asList(SuccessRiskDecision.SR);
-        List<RiskFactorDTO> successRiskFactors = factorList.stream().filter(attr -> SR.contains(attr.getCode())).collect(Collectors.toList());
+        List<RiskFactorDTO> successRiskFactors = factorList.stream().filter(item -> SR.contains(item.getCode())).collect(Collectors.toList());
         int factor = SuccessRiskDecision.determinateFactor(successRiskFactors);
-        return RiskFactorDTO.newInstance(SuccessRiskDecision.CODE, factor);
+        return RiskFactorDTO.newInstance(SuccessRiskDecision.CODE, SuccessRiskDecision.NAME, factor);
     }
 
     /**
@@ -161,7 +166,18 @@ public class AnalysisService {
      * @date 2023/4/12 10:32
      */
     private ResultResponse eachResult(List<RiskFactorDTO> factorList) {
-        return ResultResponse.testInstance();
+        // TODO 根据业务需求，此处将DR的结果剔除，暂不进行删除，以备用
+        List<RiskFactorDTO> filterRiskFactors = factorList.stream().filter(item -> !Objects.equals(DecisionRuleDecision.CODE, item.getCode())).collect(Collectors.toList());
+
+        List<RiskResultResponse> resultList = new ArrayList<>();
+        filterRiskFactors.forEach(item -> {
+            // TODO 得分只有一分两分，这个分数怎么算，就用一分两分
+            int score = item.getFactor();
+            String analysisResult = CompareUtils.compareFactor(item.getFactor());
+            RiskResultResponse riskResult = RiskResultResponse.newInstance(item.getFactor(), score, item.getCode(), item.getName(), analysisResult);
+            resultList.add(riskResult);
+        });
+        return ResultResponse.newInstance(200, "响应成功", resultList);
     }
 
     public int determinateAttr(int score) {

@@ -2,7 +2,7 @@ package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RiskScores;
 import com.decision.backend.model.Risks;
-import com.decision.backend.service.RiskAttrDTO;
+import com.decision.backend.dto.RiskAttrDTO;
 import com.decision.backend.utils.CompareUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,6 +23,7 @@ public enum SystemRiskDecision {
     ;
 
     public static final String CODE = "SR2";
+    public static final String NAME = "来源于社会环境的管理制度风险（SR2）决策规则";
     public static final String[] SR2 = {Risks.SR211.getCode(), Risks.SR212.getCode(), Risks.SR213.getCode(), Risks.SR214.getCode(), Risks.SR221.getCode(), Risks.SR222.getCode(), Risks.SR231.getCode(), Risks.SR232.getCode(), Risks.SR233.getCode(), Risks.SR241.getCode(), Risks.SR242.getCode()};
 
 

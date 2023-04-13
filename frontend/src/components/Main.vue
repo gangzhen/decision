@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div v-for="risk in $risks">
-            <Risks v-bind:risk="risk"></Risks>
+        <div v-for="(risk, num) in $risks">
+            <Risks v-bind:num="num" v-bind:risk="risk"></Risks>
             <Selections v-bind:index="risk.index" v-bind:code="risk.code"
                         v-on:send-selection="receiveSelection"></Selections>
         </div>

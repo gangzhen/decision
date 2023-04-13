@@ -2,7 +2,7 @@ package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RiskScores;
 import com.decision.backend.model.Risks;
-import com.decision.backend.service.RiskAttrDTO;
+import com.decision.backend.dto.RiskAttrDTO;
 import com.decision.backend.utils.CompareUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,6 +24,7 @@ public enum PersonalRiskDecision {
     ;
 
     public static final String CODE = "SR4";
+    public static final String NAME = "来源于社会环境的人际关系风险（SR4）决策规则";
     public static final String[] SR4 = {Risks.SR411.getCode(), Risks.SR413.getCode(), Risks.SR414.getCode(), Risks.SR415.getCode(), Risks.SR416.getCode(), Risks.SR417.getCode(), Risks.SR418.getCode(), Risks.SR421.getCode(), Risks.SR422.getCode(), Risks.SR431.getCode(), Risks.SR432.getCode()};
 
     private final RiskScores[] scoreArr;

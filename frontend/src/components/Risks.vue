@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{ risk.index }}. {{ risk.detail }}</h2>
+        <h2>{{ num + 1 }}. {{ risk.detail }}</h2>
     </div>
 </template>
 
@@ -9,6 +9,10 @@
 export default {
     name: "Risks",
     props: {
+        num: {
+            type: Number,
+            default: 0
+        },
         risk: {
             type: Object,
             default: () => ({})

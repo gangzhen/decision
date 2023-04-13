@@ -1,7 +1,7 @@
 package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RuleScores;
-import com.decision.backend.service.RiskFactorDTO;
+import com.decision.backend.dto.RiskFactorDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.ToString;
@@ -27,6 +27,7 @@ public enum SuccessRiskDecision {
 
     // 此SR为SuccessRisk 非SR1、SR2、SR3、SR4的和
     public static final String CODE = "SR";
+    public static final String NAME = "我国网球运动员成才风险决策规则";
     public static final String[] SR = {"OR2", "SR1", "SR3", "SR4"};
 
 

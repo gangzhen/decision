@@ -1,7 +1,7 @@
 package com.decision.backend.utils;
 
+import com.decision.backend.dto.RiskAttrDTO;
 import com.decision.backend.model.RiskScores;
-import com.decision.backend.service.RiskAttrDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -35,5 +35,26 @@ public class CompareUtils {
             factor = defaultFactor;
         }
         return factor;
+    }
+
+    /**
+     * @param factor 风险系数值
+     * @description 根据风险系数值判断结果
+     * @return: java.lang.String
+     * @date 2023/4/13 10:59
+     */
+    public static String compareFactor(int factor) {
+        // TODO 三种风险系数值对应的结果
+        String result = "";
+        if (factor == 1) {
+            result = "结果是1";
+        }
+        if (factor == 2) {
+            result = "结果是2";
+        }
+        if (factor == 3) {
+            result = "结果是3";
+        }
+        return result;
     }
 }

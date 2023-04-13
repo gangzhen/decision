@@ -2,7 +2,7 @@ package com.decision.backend.model.decision;
 
 import com.decision.backend.model.RiskScores;
 import com.decision.backend.model.Risks;
-import com.decision.backend.service.RiskAttrDTO;
+import com.decision.backend.dto.RiskAttrDTO;
 import com.decision.backend.utils.CompareUtils;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,7 @@ public enum GeneticRiskDecision {
     ;
 
     public static final String CODE = "OR1";
+    public static final String NAME = "来源于网球运动员自身的遗传风险（OR1）决策规则";
     public static final String[] OR1 = {Risks.OR111.getCode(), Risks.OR112.getCode(), Risks.OR121.getCode(), Risks.OR131.getCode(), Risks.OR132.getCode(), Risks.OR141.getCode(), Risks.OR142.getCode(), Risks.OR143.getCode()};
 
     private final RiskScores[] scoreArr;
