@@ -33,7 +33,8 @@ public class AnalysisService {
         RiskFactorDTO sr4Factor = analysisPRSR4Factor(riskAttrs);
         List<RiskFactorDTO> factorList = new ArrayList<>(Arrays.asList(or1Factor, or2Factor, sr1Factor, sr2Factor, sr3Factor, sr4Factor));
         RiskFactorDTO successRiskFactor = analysisSuccessRiskFactor(factorList);
-        factorList.add(decisionRuleFactor);
+        // TODO 暂时隐藏，只计算七个
+        //factorList.add(decisionRuleFactor);
         factorList.add(successRiskFactor);
         // 根据八项风险系数，判定风险等级
         return eachResult(factorList);

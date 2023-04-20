@@ -46,14 +46,17 @@ public class CompareUtils {
     public static String compareFactor(int factor) {
         // TODO 三种风险系数值对应的结果
         String result = "";
+        if (factor == 0) {
+            result = "非高风险";
+        }
         if (factor == 1) {
-            result = "结果是1";
+            result = "低风险";
         }
         if (factor == 2) {
-            result = "结果是2";
+            result = "中风险";
         }
         if (factor == 3) {
-            result = "结果是3";
+            result = "高风险";
         }
         return result;
     }

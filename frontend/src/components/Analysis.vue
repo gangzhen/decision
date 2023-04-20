@@ -19,8 +19,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item in resultTable">
-                    <td>{{ item.index }}</td>
+                <tr v-for="(item, index) in resultTable">
+                    <td>{{ index + 1 }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.score }}</td>
                     <td>{{ item.detail }}</td>
